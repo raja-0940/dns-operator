@@ -3,14 +3,14 @@ name: Build and Publish Images
 on:
   push:
     branches:
-      - main
+      - test
       - "release-*"
   workflow_dispatch:
 
 env:
   IMG_TAGS: ${{ github.sha }} ${{ github.ref_name }}
   IMG_REGISTRY_HOST: quay.io
-  IMG_REGISTRY_ORG: kuadrant
+  IMG_REGISTRY_ORG: raja0940
   IMG_REGISTRY_REPO: dns-operator
   MAIN_BRANCH_NAME: main
   OPERATOR_NAME: dns-operator
@@ -62,7 +62,7 @@ jobs:
         run: echo "Image = ${{ steps.build-image.outputs.image }}, Tags = ${{ steps.build-image.outputs.tags }}"
 
       - name: Push Image
-        if: github.repository_owner == 'kuadrant'
+        if: github.repository_owner == 'raja-0940'
         id: push-to-quay
         uses: redhat-actions/push-to-registry@v2
         with:
@@ -107,7 +107,7 @@ jobs:
         run: echo "Image = ${{ steps.build-image.outputs.image }}, Tags = ${{ steps.build-image.outputs.tags }}, Operator IMG = ${{ needs.build.outputs.build-image }}"
 
       - name: Push Image
-        if: github.repository_owner == 'kuadrant'
+        if: github.repository_owner == 'raja-0940'
         id: push-to-quay
         uses: redhat-actions/push-to-registry@v2
         with:
@@ -151,7 +151,7 @@ jobs:
         run: echo "Image = ${{ steps.build-image.outputs.image }}, Tags = ${{ steps.build-image.outputs.tags }}, Bundle IMG = ${{ needs.build-bundle.outputs.bundle-image }}"
 
       - name: Push Image
-        if: github.repository_owner == 'kuadrant'
+        if: github.repository_owner == 'raja-0940'
         id: push-to-quay
         uses: redhat-actions/push-to-registry@v2
         with:
